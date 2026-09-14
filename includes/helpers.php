@@ -17,12 +17,10 @@ function app_base_url(): string
 
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
     $isLocal = (bool) preg_match('/^(localhost|127\.0\.0\.1)(:\d+)?$/i', $host);
-    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-        || (isset($_SERVER['SERVER_PORT']) && (string) $_SERVER['SERVER_PORT'] === '443')
-        || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 
-    // Local PC stays on HTTP to avoid certificate warnings in some browsers.
-    $scheme = ($isLocal || !$https) ? 'http' : 'https';
+    // Local PC: HTTP (avoids self-signed cert issues).
+    // cPanel / live host: always HTTPS so phone camera / AR can run.
+    $scheme = $isLocal ? 'http' : 'https';
 
     $docRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '') ?: '';
     $appRoot = realpath(ROOT_PATH) ?: ROOT_PATH;
@@ -30,7 +28,7 @@ function app_base_url(): string
     $appRoot = str_replace('\\', '/', $appRoot);
 
     $rel = '';
-    if ($docRoot !== '' && str_starts_with($appRoot, $docRoot)) {
+    if ($docRoot !== '' && strpos($appRoot, $docRoot) === 0) {
         $rel = trim(substr($appRoot, strlen($docRoot)), '/');
     }
 

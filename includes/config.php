@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Change these to your restaurant branding.
  * QR codes and absolute links use the current host automatically.
  *
- * Optional: set APP_PUBLIC_BASE to a phone-reachable URL (LAN IP or HTTPS domain),
- * for example: 'http://192.168.1.10/project/ar_menu'
- * Leave empty to auto-detect from the current request.
+ * For local XAMPP: leave APP_PUBLIC_BASE empty.
+ * For cPanel / live HTTPS domain, either leave empty (auto-detect) OR set:
+ *   const APP_PUBLIC_BASE = 'https://your-domain.com/ar_menu';
  */
 const APP_BRAND = 'Jack Resto';
 const APP_NAME = 'AR Menu';
 const APP_TITLE_SUFFIX = 'Jack Resto';
-const APP_PUBLIC_BASE = 'https://vanilla-acts-snake-oscar.trycloudflare.com/project/ar_menu';
+const APP_PUBLIC_BASE = '';
 
 const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
 const ALLOWED_UPLOAD_TYPES = [
