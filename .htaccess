@@ -1,0 +1,3 @@
+# No HTTP/HTTPS redirects here.
+# PC: open http://localhost/project/ar_menu/
+# Phone: use the Cloudflare HTTPS URL from includes/config.php (APP_PUBLIC_BASE)

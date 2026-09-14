@@ -1,0 +1,4 @@
+# Deny direct access to PHP includes if served from web root subtree accidentally.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
